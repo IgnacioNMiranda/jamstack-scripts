@@ -1,0 +1,37 @@
+{
+  "name": "headless-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node -r dotenv/config $SCRIPT",
+    "lint:fix": "eslint --ext .js --fix",
+    "format:prettier": "prettier --write \"src/**/*.{js,json,md}\"",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "algoliasearch": "^4.14.3",
+    "contentful-management": "^10.25.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "^2.8.1"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": [
+      "prettier -w"
+    ]
+  }
+}
