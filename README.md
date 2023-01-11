@@ -1,10 +1,10 @@
-# headless-scripts
+# jamstack-scripts
 
-Scripts to perform CRUD operations against headless services like:
+Scripts to perform CRUD operations against services like:
 
-* Contentful
-* Algolia
-* ...
+- Contentful
+- Algolia
+- ...
 
 ## Getting Started
 
