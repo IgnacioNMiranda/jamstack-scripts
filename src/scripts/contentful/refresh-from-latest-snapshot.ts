@@ -2,7 +2,7 @@ import { environment } from '../../environment'
 import { contentfulClient } from '../../clients'
 
 // Contentful IDs array
-const ids = []
+const ids: string[] = []
 
 const limit = 10
 contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => {

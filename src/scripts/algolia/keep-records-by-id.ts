@@ -3,9 +3,9 @@ import { algoliaIndex } from '../../clients'
 /**
  * Script that keeps specific and known IDs.
  */
-const objectIdsToKeep = []
+const objectIdsToKeep: string[] = []
 
-let hits = []
+let hits: any[] = []
 algoliaIndex
   .browseObjects({
     batch: (batch) => {

@@ -14,7 +14,7 @@ contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => 
     if (entries.items.length === 0) return
     const responses = entries.items.map(async (entry) => {
       // Set your criteria to update the entries
-      const criteria = entry.fields === 'null'
+      const criteria = entry.fields.any === 'null'
       if (criteria) {
         // Update entry fields
         // entry.fields.field = 'some value'
