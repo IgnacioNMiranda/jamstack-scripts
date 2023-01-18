@@ -1,17 +1,16 @@
 {
   "name": "jamstack-scripts",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CRUD scripts for Headless technologies",
   "scripts": {
-    "start": "export $(cat .env | xargs) && ts-node $SCRIPT",
+    "start": "export $(cat .env | xargs) && ts-node $SCRIPT_PATH",
     "lint:fix": "eslint --ext .js --fix",
     "format:prettier": "prettier --write \"src/**/*.{js,json,md}\"",
     "prepare": "husky install"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ignacio Miranda Figueroa",
+  "license": "MIT",
   "dependencies": {
     "algoliasearch": "4.14.3",
     "contentful-management": "10.25.0"
