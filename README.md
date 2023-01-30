@@ -1,16 +1,25 @@
 # jamstack-scripts
 
-Scripts to perform CRUD operations against services like:
+Scripts to perform CRUD operations against the following services:
 
 - Contentful
 - Algolia
-- ...
 
 ## Getting Started
 
 1. Install dependencies using `yarn` (install it using `npm i -g yarn` if you don't have it)
 2. Clone `.env.example` to a `.env` file and set your variables
-3. Run script with `SCRIPT_PATH=<script-path> yarn start`
+3. Run `yarn start`
+
+## Adding new scripts
+
+Add a new TS file inside the existing scripts/_service_ folders.
+
+To add a new service:
+
+1. Create a new folder inside `src/scripts/` named as the service and add your script into it
+2. Add the new service client (if needed) in the `src/clients/` folder.
+3. Add environment variables to `src/environment.ts` and also an example of them inside `.env.example`.
 
 ## License
 
