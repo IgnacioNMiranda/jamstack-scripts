@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import { execSync } from 'child_process'
+import { exec } from 'child_process'
 import { deepReadDir } from './src/utils'
 
 const bootstrap = async () => {
@@ -32,6 +32,6 @@ const bootstrap = async () => {
   ])
 
   const script = scriptPaths.find((script) => script.includes(scriptAnswer.script))
-  execSync(`ts-node-dev ${script}`)
+  exec(`ts-node-dev ${script}`).stdout?.pipe(process.stdout)
 }
 bootstrap()
