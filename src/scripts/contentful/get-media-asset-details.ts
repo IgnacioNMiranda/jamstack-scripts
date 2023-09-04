@@ -16,18 +16,20 @@ export default async () => {
       ...(mediaAsset.fields.description && {
         description: mediaAsset.fields.description[environment.contentful.locale],
       }),
-      url: mediaAsset.fields.file[environment.contentful.locale].url,
-      ...(mediaAsset.fields.file[environment.contentful.locale].details?.size && {
-        size: mediaAsset.fields.file[environment.contentful.locale].details?.size,
+      ...(mediaAsset.fields.file && {
+        url: mediaAsset.fields.file[environment.contentful.locale].url,
+        ...(mediaAsset.fields.file[environment.contentful.locale].details?.size && {
+          size: mediaAsset.fields.file[environment.contentful.locale].details?.size,
+        }),
+        ...(mediaAsset.fields.file[environment.contentful.locale].details?.image?.width && {
+          width: mediaAsset.fields.file[environment.contentful.locale].details?.image?.width,
+        }),
+        ...(mediaAsset.fields.file[environment.contentful.locale].details?.image?.height && {
+          height: mediaAsset.fields.file[environment.contentful.locale].details?.image?.height,
+        }),
+        fileName: mediaAsset.fields.file[environment.contentful.locale].fileName,
+        contentType: mediaAsset.fields.file[environment.contentful.locale].contentType,
       }),
-      ...(mediaAsset.fields.file[environment.contentful.locale].details?.image?.width && {
-        width: mediaAsset.fields.file[environment.contentful.locale].details?.image?.width,
-      }),
-      ...(mediaAsset.fields.file[environment.contentful.locale].details?.image?.height && {
-        height: mediaAsset.fields.file[environment.contentful.locale].details?.image?.height,
-      }),
-      fileName: mediaAsset.fields.file[environment.contentful.locale].fileName,
-      contentType: mediaAsset.fields.file[environment.contentful.locale].contentType,
     }
   })
 
