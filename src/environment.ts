@@ -3,6 +3,7 @@ export const environment = {
     cma: process.env.CONTENTFUL_CMA ?? '',
     spaceId: process.env.CONTENTFUL_SPACE ?? '',
     env: process.env.CONTENTFUL_ENV ?? 'dev',
+    locale: process.env.CONTENTFUL_LOCALE ?? 'en-US',
     contentType: process.env.CONTENTFUL_CONTENT_TYPE ?? '',
   },
   algolia: {

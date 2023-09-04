@@ -12,20 +12,22 @@ export default async () => {
   const mediaAssets = await env.getAssets()
   const normAssets = mediaAssets.items.map((mediaAsset) => {
     return {
-      title: mediaAsset.fields.title['en-US'],
-      ...(mediaAsset.fields.description && { description: mediaAsset.fields.description['en-US'] }),
-      url: mediaAsset.fields.file['en-US'].url,
-      ...(mediaAsset.fields.file['en-US'].details?.size && {
-        size: mediaAsset.fields.file['en-US'].details.size,
+      title: mediaAsset.fields.title[environment.contentful.locale],
+      ...(mediaAsset.fields.description && {
+        description: mediaAsset.fields.description[environment.contentful.locale],
       }),
-      ...(mediaAsset.fields.file['en-US'].details?.image?.width && {
-        width: mediaAsset.fields.file['en-US'].details.image.width,
+      url: mediaAsset.fields.file[environment.contentful.locale].url,
+      ...(mediaAsset.fields.file[environment.contentful.locale].details?.size && {
+        size: mediaAsset.fields.file[environment.contentful.locale].details?.size,
       }),
-      ...(mediaAsset.fields.file['en-US'].details?.image?.height && {
-        height: mediaAsset.fields.file['en-US'].details.image.height,
+      ...(mediaAsset.fields.file[environment.contentful.locale].details?.image?.width && {
+        width: mediaAsset.fields.file[environment.contentful.locale].details?.image?.width,
       }),
-      fileName: mediaAsset.fields.file['en-US'].fileName,
-      contentType: mediaAsset.fields.file['en-US'].contentType,
+      ...(mediaAsset.fields.file[environment.contentful.locale].details?.image?.height && {
+        height: mediaAsset.fields.file[environment.contentful.locale].details?.image?.height,
+      }),
+      fileName: mediaAsset.fields.file[environment.contentful.locale].fileName,
+      contentType: mediaAsset.fields.file[environment.contentful.locale].contentType,
     }
   })
 

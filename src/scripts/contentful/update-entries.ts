@@ -21,10 +21,10 @@ export default async () => {
     if (entries.items.length === 0) return
     const responses = entries.items.map(async (entry) => {
       // Set your criteria to update the entries
-      const criteria = entry.fields.any['en-US'] === 'null'
+      const criteria = entry.fields.any[environment.contentful.locale] === 'null'
       if (criteria) {
         // Update entry fields
-        // entry.fields.field['en-US'] = 'some value'
+        // entry.fields.field[environment.contentful.locale] = 'some value'
         return entry.update()
       }
     })

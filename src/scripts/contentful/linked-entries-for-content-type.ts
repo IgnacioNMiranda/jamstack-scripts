@@ -35,7 +35,7 @@ export default async () => {
   }
 
   entriesWithMoreThanOneLink.forEach(({ entry, links }) => {
-    console.info(entry.fields.name['en-US'], '; links to this entry:', links)
+    console.info(entry.fields.name[environment.contentful.locale], '; links to this entry:', links)
   })
 
   let sum = 0
