@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "CRUD scripts for Headless services",
   "main": "main.ts",
+  "packageManager": "pnpm@8.4.0",
   "scripts": {
     "start": "export $(cat .env | xargs) && ts-node-dev main.ts",
     "lint:fix": "eslint --ext .js --fix",
@@ -14,7 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "algoliasearch": "4.14.3",
-    "contentful-management": "10.25.0"
+    "contentful-management": "10.25.0",
+    "csv": "^6.3.3",
+    "csv-stringify": "^6.4.2"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",

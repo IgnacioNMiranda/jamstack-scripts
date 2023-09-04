@@ -7,9 +7,9 @@ Scripts to perform CRUD operations against the following services:
 
 ## Getting Started
 
-1. Install dependencies using `yarn` (install it using `npm i -g yarn` if you don't have it)
+1. Install dependencies using `pnpm` (install it using `npm i -g pnpm` if you don't have it)
 2. Clone `.env.example` to a `.env` file and set your variables
-3. Run `yarn start`
+3. Run `pnpm start`
 
 ## Adding new scripts
 
