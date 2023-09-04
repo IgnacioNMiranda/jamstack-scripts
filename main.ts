@@ -37,7 +37,8 @@ const bootstrap = async () => {
     const scriptFunction = await import(`./${script}`)
     const result = await scriptFunction.default()
 
-    if (typeof result !== undefined) {
+    if (typeof result !== 'undefined') {
+      console.log(result)
       writeFile(
         `./src/outputs/${scriptAnswer.script}.json`,
         JSON.stringify(result, null, 2),
