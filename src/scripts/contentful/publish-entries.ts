@@ -1,11 +1,18 @@
 import { contentfulClient } from '../../clients'
 import { environment } from '../../environment'
 
+// Useful when wanting to filter by tags
 const tagIds: string[] = []
 
 const limit = 25
-contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => {
+
+/**
+ * Publish all the entries based on a given content type
+ */
+export default async () => {
+  const space = await contentfulClient.getSpace(environment.contentful.spaceId)
   const env = await space.getEnvironment(environment.contentful.env)
+
   let entriesFetched = 0
   while (true) {
     const entries = await env.getEntries({
@@ -27,4 +34,4 @@ contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => 
     await Promise.all(responses)
     entriesFetched += limit
   }
-})
+}

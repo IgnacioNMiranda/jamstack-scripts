@@ -9,7 +9,8 @@ const limit = 1000
 /**
  * Display a summary of the linked entries for all the entries of a given content type.
  */
-contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => {
+export default async () => {
+  const space = await contentfulClient.getSpace(environment.contentful.spaceId)
   const env = await space.getEnvironment(environment.contentful.env)
   let entriesFetched = 0
 
@@ -47,4 +48,4 @@ contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => 
   console.info('Entries with more than one link', entriesWithMoreThanOneLink.length)
   console.info('Total link entries', sum)
   console.info('Average of linked entries', sum / entriesWithMoreThanOneLink.length)
-})
+}

@@ -4,7 +4,8 @@ import { contentfulClient } from '../../clients'
 /**
  * Get API Keys for a given space
  */
-contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => {
+export default async () => {
+  const space = await contentfulClient.getSpace(environment.contentful.spaceId)
   const apiKeys = await space.getApiKeys()
-  console.log(JSON.stringify(apiKeys.items))
-})
+  return apiKeys.items
+}

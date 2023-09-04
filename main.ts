@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
-import { exec } from 'child_process'
 import { deepReadDir } from './src/utils'
+import { writeFile } from 'fs'
 
 const bootstrap = async () => {
   const scriptPaths: string[] = (await deepReadDir('src/scripts/')).flat(Number.POSITIVE_INFINITY)
@@ -32,6 +32,22 @@ const bootstrap = async () => {
   ])
 
   const script = scriptPaths.find((script) => script.includes(scriptAnswer.script))
-  exec(`ts-node-dev ${script}`).stdout?.pipe(process.stdout)
+
+  try {
+    const scriptFunction = await import(`./${script}`)
+    const result = await scriptFunction.default()
+
+    if (typeof result !== undefined) {
+      writeFile(
+        `./src/outputs/${scriptAnswer.script}.json`,
+        JSON.stringify(result, null, 2),
+        (err) => {
+          if (err) console.log(err)
+        },
+      )
+    }
+  } catch (err) {
+    console.error(err)
+  }
 }
 bootstrap()

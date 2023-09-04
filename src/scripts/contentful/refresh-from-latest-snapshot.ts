@@ -1,12 +1,18 @@
 import { environment } from '../../environment'
 import { contentfulClient } from '../../clients'
 
-// Contentful IDs array
+// Use when wanting to filter by Contentful ID
 const ids: string[] = []
 
 const limit = 10
-contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => {
+
+/**
+ * Refresh all entries of a given content type to the previous snapshot
+ */
+export default async () => {
+  const space = await contentfulClient.getSpace(environment.contentful.spaceId)
   const env = await space.getEnvironment(environment.contentful.env)
+
   let entriesFetched = 0
   let entriesRefreshed = 0
   while (true) {
@@ -35,4 +41,4 @@ contentfulClient.getSpace(environment.contentful.spaceId).then(async (space) => 
     entriesFetched += limit
     console.log(`Entries refreshed: ${entriesRefreshed}`)
   }
-})
+}
