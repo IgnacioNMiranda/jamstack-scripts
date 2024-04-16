@@ -11,4 +11,11 @@ export const environment = {
     apiKey: process.env.ALGOLIA_API_KEY ?? '',
     index: process.env.ALGOLIA_INDEX ?? '',
   },
+  stytch: {
+    projectId: process.env.STYTCH_PROJECT_ID ?? '',
+    secret: process.env.STYTCH_SECRET ?? '',
+  },
+  vercel: {
+    token: process.env.VERCEL_TOKEN ?? '',
+  },
 }

@@ -1,3 +1,5 @@
+import { environment } from '../../environment'
+
 export default async () => {
   const response = await fetch(
     'https://api.vercel.com/v10/projects/prj_lbgUtnS2yAqTyShEXmR9w8gpgr8m/env?upsert=true',
@@ -10,7 +12,7 @@ export default async () => {
         gitBranch: 'dev',
       }),
       headers: {
-        Authorization: 'Bearer <token>',
+        Authorization: `Bearer ${environment.vercel.token}`,
       },
       method: 'post',
     },
