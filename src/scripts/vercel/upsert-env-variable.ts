@@ -2,14 +2,13 @@ import { environment } from '../../environment'
 
 export default async () => {
   const response = await fetch(
-    'https://api.vercel.com/v10/projects/prj_lbgUtnS2yAqTyShEXmR9w8gpgr8m/env?upsert=true',
+    `https://api.vercel.com/v10/projects/${environment.vercel.projectId}/env?upsert=true`,
     {
       body: JSON.stringify({
-        key: 'SECRET',
-        value: 'secret',
+        key: 'secret_test',
+        value: 'test',
         type: 'encrypted',
-        target: ['preview'],
-        gitBranch: 'dev',
+        target: ['preview', 'development'],
       }),
       headers: {
         Authorization: `Bearer ${environment.vercel.token}`,

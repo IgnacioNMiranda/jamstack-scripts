@@ -17,5 +17,10 @@ export const environment = {
   },
   vercel: {
     token: process.env.VERCEL_TOKEN ?? '',
+    projectId: process.env.VERCEL_PROJECT_ID ?? '',
+  },
+  conscia: {
+    token: process.env.CONSCIA_TOKEN ?? '',
+    customerCode: process.env.CONSCIA_CUSTOMER_CODE ?? '',
   },
 }
