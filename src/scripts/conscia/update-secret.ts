@@ -6,5 +6,5 @@ export default async () => {
     secretValue: 'test2',
     dev: true,
   })
-  console.log(response)
+  return response
 }
