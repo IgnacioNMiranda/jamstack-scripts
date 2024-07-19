@@ -23,6 +23,7 @@
     "algoliasearch": "4.23.3",
     "contentful-management": "11.25.0",
     "csv": "6.3.8",
+    "csv-parser": "3.0.0",
     "csv-stringify": "6.4.6",
     "stytch": "10.15.1"
   },
