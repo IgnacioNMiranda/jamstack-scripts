@@ -2,7 +2,7 @@ import { FieldContainer, PriceTier, TypedMoney } from '@commercetools/platform-s
 
 // https://docs.commercetools.com/import-export/price#ctp:import:type:PriceImport
 export type EmbeddedPriceImport = {
-  key?: string
+  key: string
   country?: string
   validFrom?: string
   validUntil?: string
@@ -28,8 +28,7 @@ export type EmbeddedPriceImport = {
   }
   product: {
     typeId: 'product'
-    key?: string
-    id?: string
+    key: string
   }
   value: TypedMoney
   custom?: {

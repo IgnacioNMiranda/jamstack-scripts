@@ -17,7 +17,6 @@ export default async () => {
     /**
      * Structure for the file's columns should be:
      * SKU: required
-     * PriceKey: optional
      * Price{country-code}: required
      * Currency{country-code}: required
      * PriceTierMinQty: optional
@@ -74,11 +73,15 @@ export default async () => {
         return variants.some((variant) => variant.sku === priceRecord.SKU)
       })
 
-      if (product)
+      if (product) {
+        const priceKeyParts = [priceRecord.SKU, priceRecord.Country, priceRecord.Currency]
+        if (priceRecord.PriceCustomerGroupKey) priceKeyParts.push(priceRecord.PriceCustomerGroupKey)
+        if (priceRecord.PriceChannelKey) priceKeyParts.push(priceRecord.PriceChannelKey)
+
         prices.data.push({
-          productId: product.id,
+          productKey: product.key!, // Assumming it'll exist
           sku: priceRecord.SKU,
-          priceKey: priceRecord.PriceKey || undefined,
+          priceKey: priceKeyParts.join('-'),
           price: transformToCentAmount(Number(priceRecord.Price)),
           country: priceRecord.Country,
           currency: priceRecord.Currency,
@@ -91,6 +94,7 @@ export default async () => {
           priceCustomerGroupKey: priceRecord.PriceCustomerGroupKey || undefined,
           priceChannelKey: priceRecord.PriceChannelKey || undefined,
         })
+      }
     }
     const importedPrices = await commercetoolsClientFetch.importEmbeddedPrices(prices)
     return importedPrices

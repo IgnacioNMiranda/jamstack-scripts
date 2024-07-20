@@ -1,6 +1,5 @@
 export type RawEmbeddedPrice = {
   SKU: string
-  PriceKey?: string
   Price: string
   Currency: string
   Country: string
@@ -11,9 +10,9 @@ export type RawEmbeddedPrice = {
 }
 
 export type EmbeddedPrice = {
-  productId: string
+  productKey: string
   sku: string
-  priceKey?: string
+  priceKey: string
   // Cent Amount
   price: number
   country: string

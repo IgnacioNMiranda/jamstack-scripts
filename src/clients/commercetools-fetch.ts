@@ -13,13 +13,14 @@ export const commercetoolsClientFetch = {
     const resources: EmbeddedPriceImport[] = data.map((embeddedPrice) => {
       const resource: EmbeddedPriceImport = {
         country: embeddedPrice.country,
+        key: embeddedPrice.priceKey,
         productVariant: {
           typeId: 'product-variant',
           key: embeddedPrice.sku,
         },
         product: {
           typeId: 'product',
-          key: embeddedPrice.productId,
+          key: embeddedPrice.productKey,
         },
         value: {
           type: 'centPrecision',
@@ -41,8 +42,6 @@ export const commercetoolsClientFetch = {
           key: embeddedPrice.priceCustomerGroupKey,
         }
 
-      if (embeddedPrice.priceKey) resource.key = embeddedPrice.priceKey
-
       if (embeddedPrice.priceTierMinQty && embeddedPrice.tierPrice)
         resource.tiers = [
           {
@@ -62,8 +61,9 @@ export const commercetoolsClientFetch = {
     const responses: unknown[] = []
 
     // Slices of 20 due to Commercetools limit
+    // https://docs.commercetools.com/import-export/price#embeddedpriceimportrequest
     let startIndex = 0
-    const slice = 1
+    const slice = 20
     while (true) {
       const endIndex =
         startIndex + slice <= resources.length ? startIndex + slice : resources.length - 1
