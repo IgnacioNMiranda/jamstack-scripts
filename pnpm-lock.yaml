@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@commercetools/importapi-sdk':
+        specifier: ^5.4.0
+        version: 5.4.0
       '@commercetools/platform-sdk':
         specifier: 7.10.0-alpha-customer-groups.2
         version: 7.10.0-alpha-customer-groups.2
@@ -135,6 +138,10 @@ packages:
 
   '@algolia/transporter@4.23.3':
     resolution: {integrity: sha512-Wjl5gttqnf/gQKJA+dafnD0Y6Yw97yvfY8R9h0dQltX1GXTgNs1zWgvtWW0tHl1EgMdhAyw189uWiZMnL3QebQ==}
+
+  '@commercetools/importapi-sdk@5.4.0':
+    resolution: {integrity: sha512-kVDFkMzXkDQ7YAh2d+az370NDO7fftm5kOjj6SHA+ANp2xmOBajwY3/LcOJgzVbiyuTVl3Yu2tpc9TXkRe/ZCA==}
+    engines: {node: '>=14'}
 
   '@commercetools/platform-sdk@7.10.0-alpha-customer-groups.2':
     resolution: {integrity: sha512-ZhQ6lSfMsIjxqTwDYXXB3yXZgdAdM1RvB1p9NRFXK84QbxjEatQPAHle+SHo9JzfXmfbyYNorhtd+bc0zRG83w==}
@@ -2014,6 +2021,15 @@ snapshots:
       '@algolia/cache-common': 4.23.3
       '@algolia/logger-common': 4.23.3
       '@algolia/requester-common': 4.23.3
+
+  '@commercetools/importapi-sdk@5.4.0':
+    dependencies:
+      '@commercetools/sdk-client-v2': 2.5.0
+      '@commercetools/sdk-middleware-auth': 7.0.1
+      '@commercetools/sdk-middleware-http': 7.0.4
+      '@commercetools/sdk-middleware-logger': 3.0.0
+    transitivePeerDependencies:
+      - encoding
 
   '@commercetools/platform-sdk@7.10.0-alpha-customer-groups.2':
     dependencies:

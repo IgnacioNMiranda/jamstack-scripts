@@ -17,6 +17,7 @@
     "node": "20.10.0"
   },
   "dependencies": {
+    "@commercetools/importapi-sdk": "^5.4.0",
     "@commercetools/platform-sdk": "7.10.0-alpha-customer-groups.2",
     "@commercetools/sdk-client-v2": "^2.5.0",
     "@inquirer/prompts": "^5.0.1",
