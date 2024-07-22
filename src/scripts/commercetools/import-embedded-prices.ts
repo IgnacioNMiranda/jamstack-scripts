@@ -96,7 +96,7 @@ export default async () => {
         })
       }
     }
-    const importedPrices = await commercetoolsClientFetch.importEmbeddedPrices(prices)
+    const importedPrices = await commercetoolsClientFetch.importEmbeddedPrices({ prices })
     return importedPrices
   } catch (error) {
     console.error(JSON.stringify(error))

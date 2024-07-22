@@ -5,12 +5,19 @@ import { EmbeddedPrices } from '../types/prices/embedded-prices'
 import { EmbeddedPriceImport } from '../types/prices/price-import'
 
 export const commercetoolsClientFetch = {
-  importEmbeddedPrices: async ({ data }: EmbeddedPrices) => {
+  importEmbeddedPrices: async ({
+    prices,
+    importContainerKey = 'embedded-prices-container',
+  }: {
+    prices: EmbeddedPrices
+    importContainerKey?: string
+  }) => {
     const headers = new Headers({
       Authorization: `Bearer ${environment.commercetools.token}`,
+      'Content-Type': 'application/json',
     })
 
-    const resources: EmbeddedPriceImport[] = data.map((embeddedPrice) => {
+    const resources: EmbeddedPriceImport[] = prices.data.map((embeddedPrice) => {
       const resource: EmbeddedPriceImport = {
         country: embeddedPrice.country,
         key: embeddedPrice.priceKey,
@@ -75,7 +82,7 @@ export const commercetoolsClientFetch = {
       }
 
       const response = await fetch(
-        `https://import.${environment.commercetools.region}.commercetools.com/${environment.commercetools.projectKey}/prices/import-containers/embedded-prices-import-container`,
+        `https://import.${environment.commercetools.region}.commercetools.com/${environment.commercetools.projectKey}/prices/import-containers/${importContainerKey}`,
         { method: 'POST', headers, body: JSON.stringify(body) },
       )
 
@@ -86,6 +93,6 @@ export const commercetoolsClientFetch = {
       if (startIndex > resources.length) break
     }
 
-    return JSON.stringify(responses)
+    return responses
   },
 }
