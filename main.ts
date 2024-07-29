@@ -1,6 +1,6 @@
 import { select } from '@inquirer/prompts'
 import { deepReadDir } from './src/utils'
-import { writeFile } from 'fs'
+import { existsSync, mkdirSync, writeFile } from 'fs'
 
 const bootstrap = async () => {
   const scriptPaths: string[] = (await deepReadDir('src/scripts/')).flat(Number.POSITIVE_INFINITY)
@@ -30,7 +30,13 @@ const bootstrap = async () => {
 
     if (typeof result !== 'undefined') {
       console.log(result)
-      writeFile(`./src/outputs/${script}.json`, JSON.stringify(result, null, 2), (err) => {
+
+      const path = `./src/outputs/${service}/${script}.json`
+      const folderPath = path.split('/').slice(0, -1).join('/')
+
+      if (!existsSync(folderPath)) mkdirSync(folderPath, { recursive: true })
+
+      writeFile(path, JSON.stringify(result, null, 2), (err) => {
         if (err) console.log(err)
       })
     }
