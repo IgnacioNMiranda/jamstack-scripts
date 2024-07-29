@@ -1,4 +1,4 @@
-import { algoliaIndex } from '../../clients'
+import { algoliaIndex } from '../../clients/algolia'
 
 /**
  * Script that keeps specific and known IDs.

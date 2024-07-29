@@ -1,4 +1,4 @@
-import { algoliaIndex } from '../../clients'
+import { algoliaIndex } from '../../clients/algolia'
 
 export default async () => {
   return algoliaIndex.search('', {

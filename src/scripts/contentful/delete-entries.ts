@@ -1,5 +1,5 @@
 import { environment } from '../../environment'
-import { contentfulClient } from '../../clients'
+import { contentfulClient } from '../../clients/contentful'
 
 // String array
 const ids = ['1', '2', '3']

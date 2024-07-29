@@ -1,4 +1,4 @@
-import { contentfulClient } from '../../clients'
+import { contentfulClient } from '../../clients/contentful'
 import { environment } from '../../environment'
 
 // Useful when wanting to filter by tags

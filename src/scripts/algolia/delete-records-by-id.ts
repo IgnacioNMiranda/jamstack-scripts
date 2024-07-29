@@ -1,4 +1,4 @@
-import { algoliaIndex } from '../../clients'
+import { algoliaIndex } from '../../clients/algolia'
 
 /**
  * Script that deletes specific and known IDs.
