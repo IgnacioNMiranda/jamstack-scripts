@@ -22,6 +22,7 @@ export const environment = {
   conscia: {
     token: process.env.CONSCIA_TOKEN ?? '',
     customerCode: process.env.CONSCIA_CUSTOMER_CODE ?? '',
+    environment: process.env.CONSCIA_ENVIRONMENT ?? 'preview',
   },
   commercetools: {
     clientId: process.env.COMMERCETOOLS_CLIENT_ID ?? '',

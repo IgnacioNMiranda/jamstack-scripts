@@ -57,7 +57,22 @@ const updateSecret = async ({
   return data
 }
 
+const exportEnvironment = async ({ dev }: { dev: boolean }) => {
+  const response = await fetch(`${dev ? BASE_SANDBOX_URL : BASE_PROD_URL}/raw-engine-config`, {
+    headers: {
+      Authorization: `Bearer ${environment.conscia.token}`,
+      'Content-Type': 'application/json',
+      'X-Customer-Code': environment.conscia.customerCode,
+      'X-Environment-Code': environment.conscia.environment,
+    },
+    method: 'GET',
+  })
+  const data = await response.json()
+  return data
+}
+
 export const consciaClient = {
   createSecret,
   updateSecret,
+  exportEnvironment,
 }
