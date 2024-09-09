@@ -17,8 +17,9 @@ export default async () => {
     /**
      * Structure for the file's columns should be:
      * SKU: required
-     * Price{country-code}: required
-     * Currency{country-code}: required
+     * Price: required
+     * Currency: required
+     * Country: required
      * PriceTierMinQty: optional
      * TierPrice: optional
      * PriceCustomerGroupKey: optional
