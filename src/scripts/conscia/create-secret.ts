@@ -1,5 +1,6 @@
 import { consciaClient } from '../../clients/conscia'
 import { input } from '@inquirer/prompts'
+import { environment } from '../../environment'
 
 export default async () => {
   const secretKey = await input({
@@ -15,7 +16,7 @@ export default async () => {
   const response = await consciaClient.createSecret({
     secretKey,
     secretValue,
-    dev: true,
+    prod: environment.conscia.isProd,
   })
   return response
 }

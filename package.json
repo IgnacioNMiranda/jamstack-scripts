@@ -5,7 +5,7 @@
   "main": "main.ts",
   "packageManager": "pnpm@9.1.1",
   "scripts": {
-    "dev": "export $(cat .env | xargs) && ts-node-dev main.ts",
+    "dev": "node --env-file=.env -r ts-node/register main.ts",
     "lint:fix": "eslint --ext .js --fix",
     "format:prettier": "prettier --write \"src/**/*.{ts,json,md}\"",
     "prepare": "husky install"
@@ -43,7 +43,7 @@
     "inquirer": "9.2.19",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
-    "ts-node-dev": "2.0.0",
+    "ts-node": "10.9.2",
     "typescript": "5.4.5"
   },
   "lint-staged": {
