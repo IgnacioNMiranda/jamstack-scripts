@@ -149,23 +149,50 @@ type ConsciaEnvironmentConfig = {
   channel?: any
   componentType?: any
   connector?: any
+  secret?: any
   webhook?: any
+  environmentVariable?: any
 }
 
 const importEnvironment = async ({
   prod,
   customerCode,
   environmentCode,
+  preserveEnvironmentVariables,
+  preserveSecrets,
 }: {
   prod: boolean
   customerCode: string
   environmentCode: string
+  preserveSecrets: boolean
+  preserveEnvironmentVariables: boolean
 }) => {
   const config = (await import(
     `../outputs/conscia/export-environment.json`
   )) as unknown as ConsciaEnvironmentConfig
 
-  const response = await fetch(`${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/engine-config`, {
+  const jsonBody = {
+    engineConfig: {
+      connection: config.connection,
+      contextField: config.contextField,
+      component: config.component,
+      componentTemplate: config.componentTemplate,
+      channel: config.channel,
+      componentType: config.componentType,
+      connector: config.connector,
+      secret: config.secret,
+      webhook: config.webhook,
+      environmentVariable: config.environmentVariable,
+    },
+  }
+
+  const baseUrl = new URL(`${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/engine-config`)
+
+  if (preserveSecrets) baseUrl.searchParams.append('preserveSecrets', `${preserveSecrets}`)
+  if (preserveEnvironmentVariables)
+    baseUrl.searchParams.append('preserveEnvironmentVariables', `${preserveEnvironmentVariables}`)
+
+  const response = await fetch(baseUrl, {
     headers: {
       Authorization: `Bearer ${environment.conscia.token}`,
       'Content-Type': 'application/json',
@@ -173,18 +200,7 @@ const importEnvironment = async ({
       'X-Environment-Code': environmentCode,
     },
     method: 'PUT',
-    body: JSON.stringify({
-      engineConfig: {
-        connection: config.connection,
-        contextField: config.contextField,
-        webhook: config.webhook,
-        component: config.component,
-        componentTemplate: config.componentTemplate,
-        channel: config.channel,
-        componentType: config.componentType,
-        connector: config.connector,
-      },
-    }),
+    body: JSON.stringify(jsonBody),
   })
   const data = await response.json()
   return data
