@@ -238,6 +238,31 @@ const importEnvironment = async ({
   return data
 }
 
+const invalidateComponentCache = async ({
+  code,
+  customerCode,
+  environmentCode,
+  prod,
+}: {
+  code: string
+  prod: boolean
+  customerCode: string
+  environmentCode: string
+}) => {
+  const response = await fetch(
+    `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/cache/components/${code}`,
+    {
+      headers: {
+        Authorization: `Bearer ${environment.conscia.token}`,
+        'X-Customer-Code': customerCode,
+        'X-Environment-Code': environmentCode,
+      },
+      method: 'DELETE',
+    },
+  )
+  return `OK Status: ${response.ok}`
+}
+
 export const consciaClient = {
   createEnvVariable,
   updateEnvVariable,
@@ -246,4 +271,5 @@ export const consciaClient = {
   updateSecret,
   exportEnvironment,
   importEnvironment,
+  invalidateComponentCache,
 }
