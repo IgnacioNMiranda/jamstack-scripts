@@ -93,6 +93,38 @@ const createEnvVariable = async ({
   return data
 }
 
+const updateEnvVariable = async ({
+  code,
+  value,
+  customerCode,
+  environmentCode,
+  prod,
+}: {
+  code: string
+  value: string | number | boolean | Record<string, string | number | boolean>
+  prod: boolean
+  customerCode: string
+  environmentCode: string
+}) => {
+  const response = await fetch(
+    `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/environment-variables/${code}`,
+    {
+      body: JSON.stringify({
+        value,
+      }),
+      headers: {
+        Authorization: `Bearer ${environment.conscia.token}`,
+        'Content-Type': 'application/json',
+        'X-Customer-Code': customerCode,
+        'X-Environment-Code': environmentCode,
+      },
+      method: 'PATCH',
+    },
+  )
+  const data = await response.json()
+  return data
+}
+
 const deleteEnvVariable = async ({
   code,
   customerCode,
@@ -208,6 +240,7 @@ const importEnvironment = async ({
 
 export const consciaClient = {
   createEnvVariable,
+  updateEnvVariable,
   deleteEnvVariable,
   createSecret,
   updateSecret,
