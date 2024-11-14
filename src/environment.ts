@@ -6,6 +6,11 @@ export const environment = {
     locale: process.env.CONTENTFUL_LOCALE ?? 'en-US',
     contentType: process.env.CONTENTFUL_CONTENT_TYPE ?? '',
   },
+  bluestone: {
+    clientId: process.env.BLUESTONE_CLIENT_ID ?? '',
+    clientSecret: process.env.BLUESTONE_CLIENT_SECRET ?? '',
+    authUrl: process.env.BLUESTONE_AUTH_URL ?? 'https://idp.test.bluestonepim.com/op/token',
+  },
   algolia: {
     appId: process.env.ALGOLIA_APP_ID ?? '',
     apiKey: process.env.ALGOLIA_API_KEY ?? '',

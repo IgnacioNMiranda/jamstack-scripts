@@ -2,8 +2,12 @@
 
 Scripts to perform CRUD operations against the following services:
 
-- Contentful
 - Algolia
+- Bluestone
+- Commercetols
+- Conscia
+- Contentful
+- Stytch
 
 ## Getting Started
 
