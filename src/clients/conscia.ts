@@ -260,6 +260,36 @@ const invalidateComponentCache = async ({
       method: 'DELETE',
     },
   )
+
+  return `OK Status: ${response.ok}`
+}
+
+const invalidateComponentCacheByTags = async ({
+  code,
+  customerCode,
+  tags,
+  environmentCode,
+  prod,
+}: {
+  code: string
+  prod: boolean
+  tags: string[]
+  customerCode: string
+  environmentCode: string
+}) => {
+  const mappedTags: readonly [string, string][] = tags.map((tag) => ['cacheTag', tag])
+  const params = new URLSearchParams(mappedTags)
+  const url = `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/cache/components/${code}/tags?${params.toString()}`
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${environment.conscia.token}`,
+      'X-Customer-Code': customerCode,
+      'X-Environment-Code': environmentCode,
+    },
+    method: 'DELETE',
+  })
+
   return `OK Status: ${response.ok}`
 }
 
@@ -272,4 +302,5 @@ export const consciaClient = {
   exportEnvironment,
   importEnvironment,
   invalidateComponentCache,
+  invalidateComponentCacheByTags,
 }
