@@ -1,6 +1,9 @@
 export const environment = {
   contentful: {
-    cma: process.env.CONTENTFUL_CMA ?? '',
+    cmaToken: process.env.CONTENTFUL_CMA_TOKEN ?? '',
+    deliveryToken: process.env.CONTENTFUL_CDA_TOKEN ?? '',
+    previewToken: process.env.CONTENTFUL_CPA_TOKEN ?? '',
+    mode: process.env.CONTENTFUL_MODE ?? 'preview',
     spaceId: process.env.CONTENTFUL_SPACE ?? '',
     env: process.env.CONTENTFUL_ENV ?? 'dev',
     locale: process.env.CONTENTFUL_LOCALE ?? 'en-US',
