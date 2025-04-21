@@ -1,4 +1,5 @@
 import { environment } from '../environment'
+import { resolve } from 'path'
 
 const BASE_STAGING_URL = 'https://engine-staging.conscia.io/api'
 const BASE_PROD_URL = 'https://engine.conscia.io/api'
@@ -199,9 +200,8 @@ const importEnvironment = async ({
   preserveSecrets: boolean
   preserveEnvironmentVariables: boolean
 }) => {
-  const config = (await import(
-    `../outputs/conscia/export-environment.json`
-  )) as unknown as ConsciaEnvironmentConfig
+  const fullPath = resolve(__dirname, `../outputs/conscia/export-environment.json`)
+  const config = (await import(fullPath)) as unknown as ConsciaEnvironmentConfig
 
   const jsonBody = {
     engineConfig: {

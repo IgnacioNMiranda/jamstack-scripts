@@ -1,7 +1,9 @@
 .env
 node_modules
 .DS_store
+
 src/outputs/*
-src/data/*
+
+src/data/**/*.*
 !src/outputs/.gitkeep
-!src/data/.gitkeep
+!src/data/**/.gitkeep

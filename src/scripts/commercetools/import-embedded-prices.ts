@@ -25,7 +25,7 @@ export default async () => {
      * PriceCustomerGroupKey: optional
      * PriceChannelKey: optional
      */
-    const filename = 'src/data/embedded-prices.csv'
+    const filename = 'src/data/commercetools/embedded-prices.csv'
 
     await new Promise((resolve, reject) => {
       createReadStream(filename)
