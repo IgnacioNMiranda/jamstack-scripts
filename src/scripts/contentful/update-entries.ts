@@ -1,5 +1,5 @@
-import { environment } from '../../environment'
 import { contentfulClient } from '../../clients/contentful'
+import { environment } from '../../environment'
 
 const limit = 25
 
@@ -19,7 +19,7 @@ export default async () => {
       skip: entriesFetched,
     })
     if (entries.items.length === 0) return
-    const responses = entries.items.map(async (entry) => {
+    const responses = entries.items.map(async entry => {
       // Set your criteria to update the entries
       const criteria = entry.fields.any[environment.contentful.locale] === 'null'
       if (criteria) {

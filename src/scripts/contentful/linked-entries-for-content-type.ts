@@ -1,6 +1,6 @@
-import { environment } from '../../environment'
+import type { Entry } from 'contentful-management'
 import { contentfulClient } from '../../clients/contentful'
-import { Entry } from 'contentful-management'
+import { environment } from '../../environment'
 
 const entriesWithMoreThanOneLink: { entry: Entry; links: number }[] = []
 
@@ -29,19 +29,19 @@ export default async () => {
         include: 0,
       })
       if (linkedEntries.items.length > 1)
-        entriesWithMoreThanOneLink.push({ entry, links: linkedEntries.items.length })
+        entriesWithMoreThanOneLink.push({
+          entry,
+          links: linkedEntries.items.length,
+        })
     }
     entriesFetched += limit
   }
 
-  entriesWithMoreThanOneLink.forEach(({ entry, links }) => {
+  for (const { entry, links } of entriesWithMoreThanOneLink) {
     console.info(entry.fields.name[environment.contentful.locale], '; links to this entry:', links)
-  })
+  }
 
-  let sum = 0
-  entriesWithMoreThanOneLink.forEach((entry) => {
-    sum += entry.links
-  })
+  const sum = entriesWithMoreThanOneLink.reduce((prev, entry) => prev + entry.links, 0)
 
   console.log('------------------------')
 

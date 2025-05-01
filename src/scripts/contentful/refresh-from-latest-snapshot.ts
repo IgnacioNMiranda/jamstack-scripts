@@ -1,5 +1,5 @@
-import { environment } from '../../environment'
 import { contentfulClient } from '../../clients/contentful'
+import { environment } from '../../environment'
 
 // Use when wanting to filter by Contentful ID
 const ids: string[] = []

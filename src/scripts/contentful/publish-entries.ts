@@ -23,12 +23,10 @@ export default async () => {
       skip: entriesFetched,
     })
     if (entries.items.length === 0) return
-    const responses = entries.items.map(async (entry) => {
+    const responses = entries.items.map(async entry => {
       // Set your criteria to update the entries
       const isPublished =
-        entry.sys.version &&
-        entry.sys.publishedVersion &&
-        entry.sys.version === entry.sys.publishedVersion + 1
+        entry.sys.version && entry.sys.publishedVersion && entry.sys.version === entry.sys.publishedVersion + 1
       if (!isPublished) return entry.publish()
     })
     await Promise.all(responses)

@@ -1,5 +1,5 @@
-import { commercetoolsImportClient } from '../../clients/commercetools-import'
 import { input } from '@inquirer/prompts'
+import { commercetoolsImportClient } from '../../clients/commercetools-import'
 
 export default async () => {
   const containerKey = await input({

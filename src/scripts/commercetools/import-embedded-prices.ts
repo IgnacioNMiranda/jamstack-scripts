@@ -1,9 +1,9 @@
-import { createReadStream } from 'fs'
-import { commercetoolsClientFetch } from '../../clients/commercetools-fetch'
+import { createReadStream } from 'node:fs'
+import type { ProductProjection } from '@commercetools/platform-sdk'
 import csv from 'csv-parser'
 import { commercetoolsClient } from '../../clients/commercetools'
-import { ProductProjection } from '@commercetools/platform-sdk'
-import { RawEmbeddedPrice, EmbeddedPrices } from '../../types/prices/embedded-prices'
+import { commercetoolsClientFetch } from '../../clients/commercetools-fetch'
+import type { EmbeddedPrices, RawEmbeddedPrice } from '../../types/prices/embedded-prices'
 
 const transformToCentAmount = (price: number) => price * 100
 
@@ -33,13 +33,13 @@ export default async () => {
         .on('data', async (data: RawEmbeddedPrice) => {
           rawData.push(data)
         })
-        .on('error', (err) => reject(err.message))
+        .on('error', err => reject(err.message))
         .on('end', async () => {
           resolve({})
         })
     })
 
-    const skusFilter = `variants.sku:${rawData.map((price) => `"${price.SKU}"`).join(',')}`
+    const skusFilter = `variants.sku:${rawData.map(price => `"${price.SKU}"`).join(',')}`
 
     let offset = 0
     const limit = 500
@@ -59,28 +59,27 @@ export default async () => {
         })
         .execute()
 
-      if (productsResponse.body.results.length)
-        commercetoolsProducts.push(...productsResponse.body.results)
+      if (productsResponse.body.results.length) commercetoolsProducts.push(...productsResponse.body.results)
 
       offset += limit
-      if (productsResponse.body.total! <= offset) break
+      if ((productsResponse.body?.total ?? 0) <= offset) break
     }
 
     for (let i = 0; i < rawData.length; i++) {
       const priceRecord = rawData[i]
 
-      const product = commercetoolsProducts.find((product) => {
+      const product = commercetoolsProducts.find(product => {
         const variants = [product.masterVariant, ...product.variants]
-        return variants.some((variant) => variant.sku === priceRecord.SKU)
+        return variants.some(variant => variant.sku === priceRecord.SKU)
       })
 
-      if (product) {
+      if (product?.key) {
         const priceKeyParts = [priceRecord.SKU, priceRecord.Country, priceRecord.Currency]
         if (priceRecord.PriceCustomerGroupKey) priceKeyParts.push(priceRecord.PriceCustomerGroupKey)
         if (priceRecord.PriceChannelKey) priceKeyParts.push(priceRecord.PriceChannelKey)
 
         prices.data.push({
-          productKey: product.key!, // Assumming it'll exist
+          productKey: product.key,
           sku: priceRecord.SKU,
           priceKey: priceKeyParts.join('-'),
           price: transformToCentAmount(Number(priceRecord.Price)),
@@ -89,15 +88,15 @@ export default async () => {
           priceTierMinQty: priceRecord.PriceTierMinQty
             ? transformToCentAmount(Number(priceRecord.PriceTierMinQty))
             : undefined,
-          tierPrice: priceRecord.TierPrice
-            ? transformToCentAmount(Number(priceRecord.TierPrice))
-            : undefined,
+          tierPrice: priceRecord.TierPrice ? transformToCentAmount(Number(priceRecord.TierPrice)) : undefined,
           priceCustomerGroupKey: priceRecord.PriceCustomerGroupKey || undefined,
           priceChannelKey: priceRecord.PriceChannelKey || undefined,
         })
       }
     }
-    const importedPrices = await commercetoolsClientFetch.importEmbeddedPrices({ prices })
+    const importedPrices = await commercetoolsClientFetch.importEmbeddedPrices({
+      prices,
+    })
     return importedPrices
   } catch (error) {
     console.error(JSON.stringify(error))

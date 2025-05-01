@@ -1,5 +1,5 @@
-import { environment } from '../../environment'
 import { contentfulClient } from '../../clients/contentful'
+import { environment } from '../../environment'
 
 // String array
 const ids = ['1', '2', '3']
@@ -19,7 +19,7 @@ export default async () => {
       skip: entriesDeleted,
     })
     if (entries.items.length === 0) return
-    const responses = entries.items.map(async (entry) => {
+    const responses = entries.items.map(async entry => {
       if (entry.sys.publishedAt) {
         await entry.unpublish()
       }

@@ -1,5 +1,5 @@
-import { environment } from '../../environment'
 import { contentfulClient } from '../../clients/contentful'
+import { environment } from '../../environment'
 
 /**
  * Return the controls of a given content type

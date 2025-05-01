@@ -1,4 +1,4 @@
-import { FieldContainer, PriceTier, TypedMoney } from '@commercetools/platform-sdk'
+import type { FieldContainer, PriceTier, TypedMoney } from '@commercetools/platform-sdk'
 
 // https://docs.commercetools.com/import-export/price#ctp:import:type:PriceImport
 export type EmbeddedPriceImport = {

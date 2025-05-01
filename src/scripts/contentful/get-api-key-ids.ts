@@ -1,5 +1,5 @@
-import { environment } from '../../environment'
 import { contentfulClient } from '../../clients/contentful'
+import { environment } from '../../environment'
 
 /**
  * Get API Keys for a given space

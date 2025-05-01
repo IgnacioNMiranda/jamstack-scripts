@@ -1,6 +1,6 @@
-import { environment } from '../../environment'
+import type { Entry } from 'contentful-management'
 import { contentfulClient } from '../../clients/contentful'
-import { Entry } from 'contentful-management'
+import { environment } from '../../environment'
 
 const limit = 1000
 

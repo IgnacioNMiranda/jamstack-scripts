@@ -1,9 +1,5 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
-import {
-  ClientBuilder,
-  HttpMiddlewareOptions,
-  createAuthWithExistingToken,
-} from '@commercetools/sdk-client-v2'
+import { ClientBuilder, type HttpMiddlewareOptions, createAuthWithExistingToken } from '@commercetools/sdk-client-v2'
 import { environment } from '../environment'
 
 const httpMiddlewareOptions: HttpMiddlewareOptions = {

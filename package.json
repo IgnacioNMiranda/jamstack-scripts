@@ -6,51 +6,46 @@
   "packageManager": "pnpm@9.1.1",
   "scripts": {
     "dev": "node --env-file=.env -r ts-node/register main.ts",
-    "lint:fix": "eslint --ext .js --fix",
-    "format:prettier": "prettier --write \"src/**/*.{ts,json,md}\"",
+    "lint": "npx @biomejs/biome lint --write ./src",
+    "format": "npx @biomejs/biome check --write ./src",
     "prepare": "husky install"
   },
   "keywords": [],
   "author": "Ignacio Miranda Figueroa",
   "license": "MIT",
   "engines": {
-    "node": "20.10.0"
+    "node": ">=22"
   },
   "dependencies": {
-    "@commercetools/importapi-sdk": "^5.4.0",
-    "@commercetools/platform-sdk": "7.10.0-alpha-customer-groups.2",
-    "@commercetools/sdk-client-v2": "^2.5.0",
-    "@inquirer/prompts": "^5.0.1",
-    "algoliasearch": "4.23.3",
-    "cloudinary": "2.5.1",
-    "contentful": "11.5.11",
-    "contentful-management": "11.25.0",
-    "csv": "6.3.8",
-    "csv-parser": "3.0.0",
-    "csv-stringify": "6.4.6",
-    "stytch": "10.15.1"
+    "@commercetools/importapi-sdk": "6.1.1",
+    "@commercetools/platform-sdk": "8.8.0",
+    "@commercetools/sdk-client-v2": "3.0.0",
+    "@inquirer/prompts": "7.4.1",
+    "algoliasearch": "5.23.4",
+    "cloudinary": "2.6.0",
+    "contentful": "11.5.14",
+    "contentful-management": "11.52.1",
+    "csv": "6.3.11",
+    "csv-parser": "3.2.0",
+    "csv-stringify": "6.5.2",
+    "stytch": "12.17.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@types/inquirer": "9.0.7",
-    "@types/node": "20.12.7",
-    "@typescript-eslint/eslint-plugin": "7.7.0",
-    "eslint": "9.0.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-config-standard": "17.1.0",
-    "eslint-config-standard-with-typescript": "43.0.1",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-n": "17.2.1",
-    "eslint-plugin-promise": "6.1.1",
-    "husky": "9.0.11",
-    "inquirer": "9.2.19",
-    "lint-staged": "15.2.2",
-    "prettier": "3.2.5",
+    "@types/node": "22.14.1",
+    "husky": "9.1.7",
+    "inquirer": "12.5.2",
+    "lint-staged": "15.5.1",
     "ts-node": "10.9.2",
-    "typescript": "5.4.5"
+    "typescript": "5.8.3"
   },
   "lint-staged": {
-    "*.{js,json,md}": [
-      "prettier -w"
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --files-ignore-unknown=true",
+      "biome check --write --no-errors-on-unmatched",
+      "biome lint --write --no-errors-on-unmatched",
+      "biome format --write --no-errors-on-unmatched"
     ]
   }
 }

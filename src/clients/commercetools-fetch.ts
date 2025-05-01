@@ -1,8 +1,8 @@
 // Client for endpoints that have not been implemented in normal Commercetools Client yet
 
 import { environment } from '../environment'
-import { EmbeddedPrices } from '../types/prices/embedded-prices'
-import { EmbeddedPriceImport } from '../types/prices/price-import'
+import type { EmbeddedPrices } from '../types/prices/embedded-prices'
+import type { EmbeddedPriceImport } from '../types/prices/price-import'
 
 export const commercetoolsClientFetch = {
   importEmbeddedPrices: async ({
@@ -17,7 +17,7 @@ export const commercetoolsClientFetch = {
       'Content-Type': 'application/json',
     })
 
-    const resources: EmbeddedPriceImport[] = prices.data.map((embeddedPrice) => {
+    const resources: EmbeddedPriceImport[] = prices.data.map(embeddedPrice => {
       const resource: EmbeddedPriceImport = {
         country: embeddedPrice.country,
         key: embeddedPrice.priceKey,
@@ -72,8 +72,7 @@ export const commercetoolsClientFetch = {
     let startIndex = 0
     const slice = 20
     while (true) {
-      const endIndex =
-        startIndex + slice <= resources.length ? startIndex + slice : resources.length - 1
+      const endIndex = startIndex + slice <= resources.length ? startIndex + slice : resources.length - 1
 
       const slicedResources = resources.slice(startIndex, endIndex)
       const body = {

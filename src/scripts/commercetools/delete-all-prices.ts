@@ -5,11 +5,11 @@ export default async () => {
   try {
     const products = await getAllProducts()
 
-    const priceMapping = products.map((product) => ({
+    const priceMapping = products.map(product => ({
       id: product.id,
       version: product.version,
       prices: [product.masterVariant, ...product.variants]
-        .map((variant) => variant.prices?.map((price) => price.id))
+        .map(variant => variant.prices?.map(price => price.id))
         .flat(Number.POSITIVE_INFINITY) as string[],
     }))
 
@@ -22,7 +22,7 @@ export default async () => {
         .post({
           body: {
             version: priceItem.version,
-            actions: priceItem.prices.map((priceId) => ({
+            actions: priceItem.prices.map(priceId => ({
               action: 'removePrice',
               priceId,
             })),

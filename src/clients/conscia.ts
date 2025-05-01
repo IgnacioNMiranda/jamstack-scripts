@@ -1,5 +1,5 @@
+import { resolve } from 'node:path'
 import { environment } from '../environment'
-import { resolve } from 'path'
 
 const BASE_STAGING_URL = 'https://engine-staging.conscia.io/api'
 const BASE_PROD_URL = 'https://engine.conscia.io/api'
@@ -40,20 +40,17 @@ const updateSecret = async ({
   secretValue: string
   prod: boolean
 }) => {
-  const response = await fetch(
-    `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/secrets/${secretKey}`,
-    {
-      body: JSON.stringify({
-        value: secretValue,
-      }),
-      headers: {
-        Authorization: `Bearer ${environment.conscia.token}`,
-        'Content-Type': 'application/json',
-        'X-Customer-Code': environment.conscia.customerCode,
-      },
-      method: 'PUT',
+  const response = await fetch(`${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/secrets/${secretKey}`, {
+    body: JSON.stringify({
+      value: secretValue,
+    }),
+    headers: {
+      Authorization: `Bearer ${environment.conscia.token}`,
+      'Content-Type': 'application/json',
+      'X-Customer-Code': environment.conscia.customerCode,
     },
-  )
+    method: 'PUT',
+  })
   const data = await response.json()
   return data
 }
@@ -73,23 +70,20 @@ const createEnvVariable = async ({
   customerCode: string
   environmentCode: string
 }) => {
-  const response = await fetch(
-    `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/environment-variables`,
-    {
-      body: JSON.stringify({
-        environmentVariableCode: code,
-        name,
-        value,
-      }),
-      headers: {
-        Authorization: `Bearer ${environment.conscia.token}`,
-        'Content-Type': 'application/json',
-        'X-Customer-Code': customerCode,
-        'X-Environment-Code': environmentCode,
-      },
-      method: 'POST',
+  const response = await fetch(`${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/environment-variables`, {
+    body: JSON.stringify({
+      environmentVariableCode: code,
+      name,
+      value,
+    }),
+    headers: {
+      Authorization: `Bearer ${environment.conscia.token}`,
+      'Content-Type': 'application/json',
+      'X-Customer-Code': customerCode,
+      'X-Environment-Code': environmentCode,
     },
-  )
+    method: 'POST',
+  })
   const data = await response.json()
   return data
 }
@@ -107,21 +101,18 @@ const updateEnvVariable = async ({
   customerCode: string
   environmentCode: string
 }) => {
-  const response = await fetch(
-    `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/environment-variables/${code}`,
-    {
-      body: JSON.stringify({
-        value,
-      }),
-      headers: {
-        Authorization: `Bearer ${environment.conscia.token}`,
-        'Content-Type': 'application/json',
-        'X-Customer-Code': customerCode,
-        'X-Environment-Code': environmentCode,
-      },
-      method: 'PATCH',
+  const response = await fetch(`${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/environment-variables/${code}`, {
+    body: JSON.stringify({
+      value,
+    }),
+    headers: {
+      Authorization: `Bearer ${environment.conscia.token}`,
+      'Content-Type': 'application/json',
+      'X-Customer-Code': customerCode,
+      'X-Environment-Code': environmentCode,
     },
-  )
+    method: 'PATCH',
+  })
   const data = await response.json()
   return data
 }
@@ -137,17 +128,14 @@ const deleteEnvVariable = async ({
   customerCode: string
   environmentCode: string
 }) => {
-  const response = await fetch(
-    `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/environment-variables/${code}`,
-    {
-      headers: {
-        Authorization: `Bearer ${environment.conscia.token}`,
-        'X-Customer-Code': customerCode,
-        'X-Environment-Code': environmentCode,
-      },
-      method: 'DELETE',
+  const response = await fetch(`${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/experience/environment-variables/${code}`, {
+    headers: {
+      Authorization: `Bearer ${environment.conscia.token}`,
+      'X-Customer-Code': customerCode,
+      'X-Environment-Code': environmentCode,
     },
-  )
+    method: 'DELETE',
+  })
   const data = await response.json()
   return data
 }
@@ -175,16 +163,16 @@ const exportEnvironment = async ({
 }
 
 type ConsciaEnvironmentConfig = {
-  connection?: any
-  contextField?: any
-  component?: any
-  componentTemplate?: any
-  channel?: any
-  componentType?: any
-  connector?: any
-  secret?: any
-  webhook?: any
-  environmentVariable?: any
+  connection?: unknown
+  contextField?: unknown
+  component?: unknown
+  componentTemplate?: unknown
+  channel?: unknown
+  componentType?: unknown
+  connector?: unknown
+  secret?: unknown
+  webhook?: unknown
+  environmentVariable?: unknown
 }
 
 const importEnvironment = async ({
@@ -200,7 +188,7 @@ const importEnvironment = async ({
   preserveSecrets: boolean
   preserveEnvironmentVariables: boolean
 }) => {
-  const fullPath = resolve(__dirname, `../outputs/conscia/export-environment.json`)
+  const fullPath = resolve(__dirname, '../outputs/conscia/export-environment.json')
   const config = (await import(fullPath)) as unknown as ConsciaEnvironmentConfig
 
   const jsonBody = {
@@ -249,17 +237,14 @@ const invalidateComponentCache = async ({
   customerCode: string
   environmentCode: string
 }) => {
-  const response = await fetch(
-    `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/cache/components/${code}`,
-    {
-      headers: {
-        Authorization: `Bearer ${environment.conscia.token}`,
-        'X-Customer-Code': customerCode,
-        'X-Environment-Code': environmentCode,
-      },
-      method: 'DELETE',
+  const response = await fetch(`${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/cache/components/${code}`, {
+    headers: {
+      Authorization: `Bearer ${environment.conscia.token}`,
+      'X-Customer-Code': customerCode,
+      'X-Environment-Code': environmentCode,
     },
-  )
+    method: 'DELETE',
+  })
 
   return `OK Status: ${response.ok}`
 }
@@ -277,7 +262,7 @@ const invalidateComponentCacheByTags = async ({
   customerCode: string
   environmentCode: string
 }) => {
-  const mappedTags: readonly [string, string][] = tags.map((tag) => ['cacheTag', tag])
+  const mappedTags: readonly [string, string][] = tags.map(tag => ['cacheTag', tag])
   const params = new URLSearchParams(mappedTags)
   const url = `${!prod ? BASE_STAGING_URL : BASE_PROD_URL}/cache/components/${code}/tags?${params.toString()}`
 

@@ -1,4 +1,4 @@
-import { ProductProjection } from '@commercetools/platform-sdk'
+import type { ProductProjection } from '@commercetools/platform-sdk'
 import { commercetoolsClient } from '../../clients/commercetools'
 
 const limit = 500

@@ -5,15 +5,8 @@ import { algoliaIndex } from '../../clients/algolia'
  */
 const objectIdsToKeep: string[] = []
 
-let hits: any[] = []
-algoliaIndex
-  .browseObjects({
-    batch: (batch) => {
-      hits = hits.concat(batch)
-    },
-  })
-  .then(() => {
-    const objectIds = hits.map((hit) => hit.objectID)
-    const objectIdsToDelete = objectIds.filter((objectId) => !objectIdsToKeep.includes(objectId))
-    algoliaIndex.deleteObjects(objectIdsToDelete)
-  })
+algoliaIndex.browseObjects().then(hits => {
+  const objectIds = hits.map(hit => hit.objectID)
+  const objectIdsToDelete = objectIds.filter(objectId => !objectIdsToKeep.includes(objectId))
+  algoliaIndex.deleteObjects(objectIdsToDelete)
+})

@@ -1,8 +1,8 @@
-import { Product, ProductProjection, ProductUpdateAction } from '@commercetools/platform-sdk'
-import { commercetoolsClient } from '../../clients/commercetools'
-import { resolve } from 'path'
-import getAllProducts from './get-all-products'
+import { resolve } from 'node:path'
+import type { Product, ProductProjection, ProductUpdateAction } from '@commercetools/platform-sdk'
 import { input } from '@inquirer/prompts'
+import { commercetoolsClient } from '../../clients/commercetools'
+import getAllProducts from './get-all-products'
 
 export default async () => {
   const locale = await input({
@@ -21,20 +21,26 @@ export default async () => {
 
     for (const targetProd of targetProducts) {
       const sourceProd = (sourceProducts as ProductProjection[]).find(
-        (prod) => prod.slug[locale] === targetProd.slug[locale],
+        prod => prod.slug[locale] === targetProd.slug[locale],
       )
 
       if (sourceProd) {
         const actions: ProductUpdateAction[] = []
         if (sourceProd.metaTitle && !targetProd.metaTitle)
-          actions.push({ action: 'setMetaTitle', metaTitle: sourceProd.metaTitle })
+          actions.push({
+            action: 'setMetaTitle',
+            metaTitle: sourceProd.metaTitle,
+          })
         if (sourceProd.metaDescription && !targetProd.metaDescription)
           actions.push({
             action: 'setMetaDescription',
             metaDescription: sourceProd.metaDescription,
           })
         if (sourceProd.metaKeywords && !targetProd.metaKeywords)
-          actions.push({ action: 'setMetaKeywords', metaKeywords: sourceProd.metaKeywords })
+          actions.push({
+            action: 'setMetaKeywords',
+            metaKeywords: sourceProd.metaKeywords,
+          })
 
         if (actions.length) {
           const updatedProduct = await commercetoolsClient

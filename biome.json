@@ -1,0 +1,28 @@
+{
+  "files": {
+    "ignore": ["./src/*.json"]
+  },
+  "formatter": {
+    "lineWidth": 120,
+    "lineEnding": "lf",
+    "ignore": ["node_modules", ".env.*", ".eslintrc.cjs"]
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
+    },
+    "formatter": {
+      "indentStyle": "space",
+      "lineEnding": "lf"
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "asNeeded",
+      "trailingCommas": "all",
+      "indentStyle": "space"
+    }
+  }
+}

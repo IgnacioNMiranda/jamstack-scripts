@@ -1,9 +1,5 @@
-import {
-  ClientBuilder,
-  createAuthForClientCredentialsFlow,
-  createHttpClient,
-} from '@commercetools/sdk-client-v2'
 import { createApiBuilderFromCtpClient } from '@commercetools/importapi-sdk'
+import { ClientBuilder, createAuthForClientCredentialsFlow, createHttpClient } from '@commercetools/sdk-client-v2'
 import { environment } from '../environment'
 
 const authMiddlewareOptions = {

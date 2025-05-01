@@ -1,7 +1,7 @@
-import { environment } from '../../environment'
-import { contentfulClient } from '../../clients/contentful'
-import { createWriteStream } from 'fs'
+import { createWriteStream } from 'node:fs'
 import { stringify } from 'csv-stringify'
+import { contentfulClient } from '../../clients/contentful'
+import { environment } from '../../environment'
 
 const limit = 1000
 
@@ -23,7 +23,7 @@ export default async () => {
     if (mediaAssets.items.length === 0) break
 
     const normAssets = mediaAssets.items
-      .map((mediaAsset) => {
+      .map(mediaAsset => {
         if (Object.keys(mediaAsset.fields).length === 0) return undefined
         return {
           id: mediaAsset.sys.id,
@@ -56,22 +56,12 @@ export default async () => {
   const filename = 'src/outputs/get-media-asset-details.csv'
   const writableStream = createWriteStream(filename)
 
-  const columns = [
-    'id',
-    'title',
-    'description',
-    'url',
-    'size',
-    'width',
-    'height',
-    'fileName',
-    'contentType',
-  ]
+  const columns = ['id', 'title', 'description', 'url', 'size', 'width', 'height', 'fileName', 'contentType']
 
   const stringifier = stringify({ header: true, columns: columns })
-  totalAssets.forEach((asset) => {
+  for (const asset of totalAssets) {
     stringifier.write(asset)
-  })
+  }
 
   stringifier.pipe(writableStream)
 }

@@ -1,5 +1,5 @@
-import { commercetoolsClient } from '../../clients/commercetools'
 import type { BusinessUnit, BusinessUnitUpdate } from '@commercetools/platform-sdk'
+import { commercetoolsClient } from '../../clients/commercetools'
 
 const buCustomTypeId = '<id>'
 
@@ -13,6 +13,7 @@ export default async () => {
 
       const fields = bu.custom?.fields
         ? Object.entries(bu.custom?.fields).reduce((prev, [currKey, currValue]) => {
+            // biome-ignore lint/performance/noAccumulatingSpread: Since this is an object instead of an array, allowing spread operator
             return { ...prev, [currKey]: currValue }
           }, {})
         : []

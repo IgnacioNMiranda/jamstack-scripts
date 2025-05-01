@@ -12,21 +12,18 @@ export default async () => {
     default: 'test',
   })
 
-  const response = await fetch(
-    `https://api.vercel.com/v10/projects/${environment.vercel.projectId}/env?upsert=true`,
-    {
-      body: JSON.stringify({
-        key: secretKey,
-        value: secretValue,
-        type: 'encrypted',
-        target: ['preview', 'development'],
-      }),
-      headers: {
-        Authorization: `Bearer ${environment.vercel.token}`,
-      },
-      method: 'post',
+  const response = await fetch(`https://api.vercel.com/v10/projects/${environment.vercel.projectId}/env?upsert=true`, {
+    body: JSON.stringify({
+      key: secretKey,
+      value: secretValue,
+      type: 'encrypted',
+      target: ['preview', 'development'],
+    }),
+    headers: {
+      Authorization: `Bearer ${environment.vercel.token}`,
     },
-  )
+    method: 'post',
+  })
   const data = await response.json()
   return data
 }

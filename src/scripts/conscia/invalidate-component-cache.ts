@@ -1,5 +1,5 @@
-import { consciaClient } from '../../clients/conscia'
 import { input } from '@inquirer/prompts'
+import { consciaClient } from '../../clients/conscia'
 import { environment } from '../../environment'
 
 export default async () => {
