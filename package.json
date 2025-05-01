@@ -1,14 +1,13 @@
 {
   "name": "jamstack-scripts",
-  "version": "1.1.0",
-  "description": "CRUD scripts for Headless services",
-  "main": "main.ts",
-  "packageManager": "pnpm@9.1.1",
+  "version": "1.2.0",
+  "description": "CRUD scripts for different Web third parties",
+  "main": "./src/main.ts",
+  "packageManager": "pnpm@10.10.0",
   "scripts": {
-    "dev": "node --env-file=.env -r ts-node/register main.ts",
+    "dev": "node --env-file=.env -r ts-node/register ./src/main.ts",
     "lint": "npx @biomejs/biome lint --write ./src",
-    "format": "npx @biomejs/biome check --write ./src",
-    "prepare": "husky install"
+    "format": "npx @biomejs/biome check --write --organize-imports-enabled=true ./src"
   },
   "keywords": [],
   "author": "Ignacio Miranda Figueroa",
@@ -20,22 +19,22 @@
     "@commercetools/importapi-sdk": "6.1.1",
     "@commercetools/platform-sdk": "8.8.0",
     "@commercetools/sdk-client-v2": "3.0.0",
-    "@inquirer/prompts": "7.4.1",
-    "algoliasearch": "5.23.4",
+    "@inquirer/prompts": "7.5.0",
+    "algoliasearch": "5.24.0",
     "cloudinary": "2.6.0",
-    "contentful": "11.5.14",
-    "contentful-management": "11.52.1",
+    "contentful": "11.5.18",
+    "contentful-management": "11.52.2",
     "csv": "6.3.11",
     "csv-parser": "3.2.0",
     "csv-stringify": "6.5.2",
-    "stytch": "12.17.0"
+    "stytch": "12.19.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "1.9.4",
     "@types/inquirer": "9.0.7",
-    "@types/node": "22.14.1",
+    "@types/node": "22.15.3",
     "husky": "9.1.7",
-    "inquirer": "12.5.2",
+    "inquirer": "12.6.0",
     "lint-staged": "15.5.1",
     "ts-node": "10.9.2",
     "typescript": "5.8.3"
@@ -44,7 +43,7 @@
     "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
       "biome check --files-ignore-unknown=true",
       "biome check --write --no-errors-on-unmatched",
-      "biome lint --write --no-errors-on-unmatched",
+      "biome lint --write --no-errors-on-unmatched --files-ignore-unknown=true",
       "biome format --write --no-errors-on-unmatched"
     ]
   }

@@ -1,5 +1,5 @@
-import { cloudinaryClient } from '../../clients/cloudinary'
 import { input } from '@inquirer/prompts'
+import { cloudinaryClient } from '../../clients/cloudinary'
 
 export default async () => {
   const publicIds = await input({
