@@ -188,7 +188,7 @@ const importEnvironment = async ({
   preserveSecrets: boolean
   preserveEnvironmentVariables: boolean
 }) => {
-  const fullPath = resolve(__dirname, '../outputs/conscia/export-environment.json')
+  const fullPath = resolve(__dirname, '../../outputs/conscia/export-environment.json')
   const config = (await import(fullPath)) as unknown as ConsciaEnvironmentConfig
 
   const jsonBody = {
