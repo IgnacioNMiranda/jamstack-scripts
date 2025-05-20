@@ -1,11 +1,18 @@
 {
   "files": {
-    "ignore": ["./src/*.json"]
+    "ignore": ["./src/*.json", "./.vscode/settings.json"]
+  },
+  "linter": {
+    "rules": {
+      "correctness": {
+        "noUnusedImports": "warn"
+      }
+    }
   },
   "formatter": {
     "lineWidth": 120,
     "lineEnding": "lf",
-    "ignore": ["node_modules", ".env.*", ".eslintrc.cjs"]
+    "ignore": ["node_modules", ".env.*"]
   },
   "json": {
     "parser": {
@@ -13,7 +20,8 @@
     },
     "formatter": {
       "indentStyle": "space",
-      "lineEnding": "lf"
+      "lineEnding": "lf",
+      "trailingCommas": "none"
     }
   },
   "javascript": {

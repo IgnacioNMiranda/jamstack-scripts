@@ -40,7 +40,7 @@
     "typescript": "5.8.3"
   },
   "lint-staged": {
-    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,json,jsonc}": [
       "biome check --files-ignore-unknown=true",
       "biome check --write --no-errors-on-unmatched",
       "biome lint --write --no-errors-on-unmatched --files-ignore-unknown=true",
