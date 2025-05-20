@@ -1,4 +1,4 @@
-# jamstack-scripts
+# Web Scripts
 
 Scripts to perform CRUD operations against the following third party services/platforms:
 

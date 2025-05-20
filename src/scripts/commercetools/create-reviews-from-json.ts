@@ -23,9 +23,11 @@ export default async () => {
 
   const matchingProductsList: ProductProjection[] = []
 
+  console.log(`Trying to import ${reviewsData.reviews.length} reviews.`)
+
   const chunkSize = 20
   for (let i = 0; i <= reviewsData.reviews.length; i += chunkSize) {
-    const chunk = reviewsData.reviews.slice(i, chunkSize)
+    const chunk = reviewsData.reviews.slice(i, i + chunkSize)
     const skus = chunk.map(review => `"${review.target}"`)
 
     try {
@@ -49,17 +51,22 @@ export default async () => {
     console.error('No matching products were found for the provided Reviews.')
     return
   }
+  console.log(`Matching products found: ${matchingProductsList.length}`)
 
   const createdReviewIds: string[] = []
   for (const review of reviewsData.reviews) {
     const product = matchingProductsList.find(prod => {
       const variants = [prod.masterVariant, ...prod.variants]
-      return variants.some(vari => vari.sku === review.target)
+      return variants.some(vari => vari.sku === `${review.target}`)
     })
+
     if (!product) {
-      console.log(`'${review.title}' by "${review.authorName}" could not be created. No matching product found.`)
+      console.log(
+        `'${review.title}' by "${review.authorName}" with target *${review.target}* could not be created. No matching product found.`,
+      )
       continue
     }
+
     try {
       const newReview = await commercetoolsClient
         .reviews()
@@ -86,5 +93,6 @@ export default async () => {
     }
   }
 
+  console.log(`Reviews created: ${createdReviewIds.length}`)
   return createdReviewIds
 }

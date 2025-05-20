@@ -1,7 +1,7 @@
 {
-  "name": "jamstack-scripts",
+  "name": "web-scripts",
   "version": "1.2.0",
-  "description": "CRUD scripts for different Web third parties",
+  "description": "CRUD scripts for different third party platforms.",
   "main": "./src/main.ts",
   "packageManager": "pnpm@10.10.0",
   "scripts": {
